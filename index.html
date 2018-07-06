@@ -1,0 +1,211 @@
+<!DOCTYPE html> 
+<html>
+<head>
+	<title>Page Title</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="js/jquery.mobile-1.4.5.min.css" />
+	<script src="js/jquery-2.1.1.min.js"></script>
+	<script src="js/jquery.mobile-1.4.5.min.js"></script>
+	<script src="js/mqtt.min.js"></script>
+	<script src="main.js"></script>
+	<script>
+		$(document).on('pageinit','#splash',function(){
+		    setTimeout(function(){
+			$.mobile.changePage("#login", "fade");
+		    }, 4000);
+		});
+	</script>
+	<script id="panel-init">
+		$(function() {
+			$( "body>[data-role='panel']" ).panel();
+		});
+	</script>
+	
+</head>
+
+<body>
+
+<div data-role="page" id="splash"> 
+	<div class="splash">
+	     <img src="the-cloud.jpg" alt="startup image" width="100%" height="auto" />
+	</div>
+</div>
+
+<div data-role="page" id="login" data-theme="b">
+	<div role="main" class="ui-content"><br><br><br><br><br><br><br><br><br><br>
+		<input type="text" placeholder="Username" id="user" data-theme="a" />
+		<input type="password" placeholder="Password" id="pswd" data-theme="a" />
+		<button onclick="login()" class="ui-btn ui-shadow ui-corner-all">Login</button>
+		<div id="myresult"></div>
+	</div><!-- /content -->
+</div><!-- /page -->
+
+<div data-role="panel" id="mypanel" data-position="left" data-display="reveal" data-theme="b">
+	<h3>Navigation</h2>
+	<p>
+		<a href="#home" data-transition="slide" class="ui-btn ui-shadow ui-corner-all ui-mini">Home</a>
+		<a href="#about" data-transition="slide" class="ui-btn ui-shadow ui-corner-all ui-mini">About</a>
+		<a href="#features" data-transition="slide" class="ui-btn ui-shadow ui-corner-all ui-mini">Features</a>
+		<a href="#settings" data-transition="slide" class="ui-btn ui-shadow ui-corner-all ui-mini">Settings</a>
+		<a href="#contact" data-transition="slide" class="ui-btn ui-shadow ui-corner-all ui-mini">Contact</a>
+	</p>
+</div><!-- /panel -->
+
+
+<div data-role="page" id="settings" data-theme="b">
+
+<div data-role="header" data-theme="b">
+		<a href="#mypanel" data-icon="gear" class="ui-btn-left">OPTIONS</a>
+		<h1>HOME</h1>
+		<a href="#login" data-icon="user" class="ui-btn-right">SIGNOUT</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content"><br><br><br><br><br><br><br><br><br><br>
+		<input type="text" placeholder="Ip Address:" id="ip_add" data-theme="a" />
+		<input type="text" placeholder="Port no:" id="ip_port" data-theme="a" />
+		<button  onclick="connect()" class="ui-btn ui-shadow ui-corner-all"><span id="con_btn">Connect</span></button>
+		<p id="con_status">Not connected</p>
+	</div><!-- /content -->
+</div><!-- /page -->
+
+
+
+<div data-role="page" id="home">
+
+	<div data-role="header" data-theme="b">
+		<a href="#mypanel" data-icon="gear" class="ui-btn-left">OPTIONS</a>
+		<h1>HOME</h1>
+		<a href="#login" data-icon="user" class="ui-btn-right">SIGNOUT</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<p id="name"></p><br><br><br>
+	
+	<p id="connected">Not Connected</p><br><br><br>
+         
+		<br><br><br><br>
+		<a href="#led" data-transition="slide" class="ui-btn ui-shadow ui-corner-all">LED Blink</a>
+		<a href="#ldr" data-transition="slide" class="ui-btn ui-shadow ui-corner-all">LDR</a>
+		<a href="#temp" data-transition="slide" class="ui-btn ui-shadow ui-corner-all">Temperature</a>
+		<a href="#sec" data-transition="slide" class="ui-btn ui-shadow ui-corner-all">xxxxxxx</a>
+	</div><!-- /content -->
+</div><!-- /page -->
+
+
+<div data-role="page" id="about">
+
+	<div data-role="header" data-theme="b">
+		<a href="#mypanel" data-icon="gear" class="ui-btn-left">Options</a>
+		<h1>About Me</h1>
+		<a href="#login" data-icon="user" class="ui-btn-right">SIGNOUT</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<p>Write something about you here.</p>
+	</div><!-- /content -->
+</div><!-- /page -->
+
+
+<div data-role="page" id="features">
+
+	<div data-role="header" data-theme="b">
+		<a href="#mypanel" data-icon="gear" class="ui-btn-left">Options</a>
+		<h1>FEATURES</h1>
+		<a href="#login" data-icon="user" class="ui-btn-right">SIGNOUT</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<p>On this page you will introduse features of your app.</p>
+	</div><!-- /content -->
+</div><!-- /page -->
+
+
+<div data-role="page" id="howto">
+
+	<div data-role="header" data-theme="b">
+		<a href="#mypanel" data-icon="gear" class="ui-btn-left">Options</a>
+		<h1>HOW TO</h1>
+		<a href="#login" data-icon="user" class="ui-btn-right">SIGNOUT</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<p>Here you need to mention how a user can use this app.</p>
+	</div><!-- /content -->
+</div><!-- /page -->
+
+
+
+<div data-role="page" id="contact">
+
+	<div data-role="header" data-theme="b">
+		<a href="#mypanel" data-icon="gear" class="ui-btn-left">Options</a>
+		<h1>CONTACT</h1>
+		<a href="#login" data-icon="user" class="ui-btn-right">SIGNOUT</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<p>Write your contact details on this page.</p>
+	</div><!-- /content -->
+</div><!-- /page -->
+
+
+<div data-role="page" id="led">
+
+	<div data-role="header" data-theme="b">
+		<a href="#mypanel" data-icon="gear" class="ui-btn-left">Options</a>
+		<h1>LED BLINK</h1>
+		<a href="#login" data-icon="user" class="ui-btn-right">SIGNOUT</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<label for="flip-1">Turn light ON or OFF:</label><br><br><br><br><br><br>
+		<div align="center" width="30px">
+		<select name="flip-1" id="flip-1" data-role="slider">
+			<option value="off">OFF</option>
+			<option value="on">ON</option>
+		</select>
+		</div>
+	</div><!-- /content -->
+</div><!-- /page -->
+
+<div data-role="page" id="ldr">
+
+	<div data-role="header" data-theme="b">
+		<a href="#mypanel" data-icon="gear" class="ui-btn-left">Options</a>
+		<h1>LDR</h1>
+		<a href="#login" data-icon="user" class="ui-btn-right">SIGNOUT</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content"><br><br><br><br><br><br><br>
+		<p align="center"><font size="15"><span id='ldr'>0</span></font></p>
+	</div><!-- /content -->
+</div><!-- /page -->
+
+<div data-role="page" id="temp">
+
+	<div data-role="header" data-theme="b">
+		<a href="#mypanel" data-icon="gear" class="ui-btn-left">Options</a>
+		<h1>TEMPERATURE</h1>
+		<a href="#login" data-icon="user" class="ui-btn-right">SIGNOUT</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content"><br><br><br><br><br><br><br>
+		<p align="center"><font size="15"><span id="nikhil">0</span></font> C</p>
+	</div><!-- /content -->
+</div><!-- /page -->
+
+<div data-role="page" id="sec">
+
+	<div data-role="header" data-theme="b">
+		<a href="#mypanel" data-icon="gear" class="ui-btn-left">Options</a>
+		<h1>XXXXXXX</h1>
+		<a href="#login" data-icon="user" class="ui-btn-right">SIGNOUT</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<p>xxxxxx content goes here.</p>
+	</div><!-- /content -->
+</div><!-- /page -->
+
+</body>
+</html>
